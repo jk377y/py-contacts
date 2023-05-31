@@ -65,16 +65,29 @@ def delete_contact():
 
 
 # need to define a menu system for the user to interact with the contacts
-While: True
-print('\n-----Contacts Menu-----')
-print('1. View a contact') # maybe add a search option here?
-print('2. Add a contact')
-print('3. Edit a contact') # display the contact and their information, then ask for the new info
-print('4. Delete a contact')
-print('5. Exit')
+while True:
+    print('\n-----Contacts Menu-----')
+    print('1. View a contact') # maybe add a search option here?
+    print('2. Add a contact')
+    print('3. Edit a contact') # display the contact and their information, then ask for the new info
+    print('4. Delete a contact')
+    print('5. Exit')
 
+    choice = input('Enter your choice: ')
 
-
+    if choice == '1':
+        read_contact()
+    elif choice == '2':
+        create_contact()
+    elif choice == '3':
+        update_contact()
+    elif choice == '4':
+        delete_contact()
+    elif choice == '5':
+        break # this will exit the loop and end the program
+    else:
+        print('Invalid choice!')
+        continue # this will go back to the top of the loop and display the menu again if the user enters an invalid choice
 
 # on exit, save the contacts to the file - or maybe save on every change?
 
