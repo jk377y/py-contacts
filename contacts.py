@@ -18,14 +18,28 @@ with open('contacts.json', 'w') as file:
 
 
 # need to utilize CRUD operations on the contacts
-def create_contact():
-    # create a new contact
-    # ask for the contact information
-    # generate a unique id for the contact using uuid
-    # add the contact to the contacts list
-    # save the contacts to the file
-    pass
+def create_contact(): # this is the create operation for the new_contact; it accepts the information from the user and creates a new contact
+    first_name = input('Enter the first name: ')
+    last_name = input('Enter the last name: ')
+    birthdate = input('Enter the birthdate: ')
+    phone_number = input('Enter the phone number: ')
+    email_address = input('Enter the email address: ')
+    
+    new_contact = { # this is a dictionary that will hold the new contact information
+        'id': str(uuid.uuid4()),
+        'first_name': first_name,
+        'last_name': last_name,
+        'birthdate': birthdate,
+        'phone_number': phone_number,
+        'email_address': email_address
+    }
+    contacts.append(new_contact) # this will add the new contact to the contacts.json file
 
+    with open('contacts.json', 'w') as file:
+        json.dump(contacts, file)
+
+    print('Contact added successfully!')
+    
 def read_contact():
     # read a contact
     # ask for the contact id, or maybe a search option for the name?
