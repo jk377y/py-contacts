@@ -238,13 +238,5 @@
         "phone_number": "1234567890",
         "email": "christopherturner@example.com",
         "id": "4efe9e53-e95d-4e49-b93c-8ad405f4c402"
-    },
-    {
-        "id": "1ff665b8-c213-49d9-8063-1c29a6a06e58",
-        "first_name": "James",
-        "last_name": "Kelly",
-        "birthdate": "1981-02-25",
-        "phone_number": "6666666666",
-        "email": "jk377y@gmail.com"
     }
 ]
