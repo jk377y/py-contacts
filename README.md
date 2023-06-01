@@ -5,7 +5,6 @@
 ## Description
 This is a digital Rolodex type application that allows the user to create, read, update, and delete contacts. The user can select a contact_id and view that contact's information in the terminal window.
 <br>
-<br>
 
 ### ***Some notes about the Python uuid module:***<br>
  - UUIDs are useful for generating unique identifiers in various applications, such as database records, distributed systems, and network protocols.<br>
