@@ -18,12 +18,13 @@ with open('contacts.json', 'w') as file:
 
 
 # need to utilize CRUD operations on the contacts
+# create_contact is working as intended - will probably remove the seed files once everything is fully functional
 def create_contact(): # this is the create operation for the new_contact; it accepts the information from the user and creates a new contact
     first_name = input('Enter the first name: ')
     last_name = input('Enter the last name: ')
     birthdate = input('Enter the birthdate: ')
     phone_number = input('Enter the phone number: ')
-    email_address = input('Enter the email address: ')
+    email = input('Enter the email address: ')
     
     new_contact = { # this is a dictionary that will hold the new contact information
         'id': str(uuid.uuid4()),
@@ -31,7 +32,7 @@ def create_contact(): # this is the create operation for the new_contact; it acc
         'last_name': last_name,
         'birthdate': birthdate,
         'phone_number': phone_number,
-        'email_address': email_address
+        'email': email
     }
     contacts.append(new_contact) # this will add the new contact to the contacts.json file
 
@@ -40,11 +41,31 @@ def create_contact(): # this is the create operation for the new_contact; it acc
 
     print('Contact added successfully!')
     
+
+def display_contact(contact):
+    print('\n----- Contact Information -----')
+    print(f'ID: {contact["id"]}')
+    print(f'First Name: {contact["first_name"]}')
+    print(f'Last Name: {contact["last_name"]}')
+    print(f'Birthdate: {contact["birthdate"]}')
+    print(f'Phone Number: {",".join(contact["phone_number"])}')
+    print(f'Email: {contact["email"]}')
+    print('-------------------------------')
+
 def read_contact():
-    # read a contact
-    # ask for the contact id, or maybe a search option for the name?
-    # display the contact information
-    pass
+    print('\n----- All Contacts -----')
+    print('ID\t\tFirst Name\tLast Name')
+    for contact in contacts:
+        print(f'{contact["id"]}\t{contact["first_name"]}\t\t{contact["last_name"]}')
+    
+    contact_id = input('\nEnter the ID of the contact you want to view: ')
+    
+    for contact in contacts:
+        if contact['id'] == contact_id:
+            display_contact(contact)
+            break
+    else:
+        print('Contact not found.')
 
 def update_contact():
     # update a contact
@@ -73,7 +94,7 @@ while True:
     print('4. Delete a contact')
     print('5. Exit')
 
-    choice = input('Enter your choice: ')
+    choice = input('\nEnter your choice: ')
 
     if choice == '1':
         read_contact()
