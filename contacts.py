@@ -66,13 +66,60 @@ def read_contact():
         print('Contact not found.')
 
 def update_contact():
-    # update a contact
-    # ask for the contact id
-    # display the contact information
-    # ask for the new contact information
-    # update the contact in the contacts list
-    # save the contacts to the file
-    pass
+    table = []
+    for contact in contacts:
+        table.append([contact["id"], contact["first_name"], contact["last_name"]])
+
+    headers = ['ID', 'First Name', 'Last Name']
+    print(tabulate(table, headers, tablefmt='grid'))
+
+    contact_id = input('\nEnter the ID of the contact you want to update: ')
+
+    for contact in contacts:
+        if contact['id'] == contact_id:
+            display_contact(contact)
+            print('\nSelect the fields you want to update:')
+            print('1. First Name')
+            print('2. Last Name')
+            print('3. Birthdate')
+            print('4. Phone Number')
+            print('5. Email')
+            print('6. Done')
+
+            fields_to_update = []
+            done = False
+
+            while not done:
+                choice = input('Enter your choice: ')
+
+                if choice == '1':
+                    fields_to_update.append('first_name')
+                elif choice == '2':
+                    fields_to_update.append('last_name')
+                elif choice == '3':
+                    fields_to_update.append('birthdate')
+                elif choice == '4':
+                    fields_to_update.append('phone_number')
+                elif choice == '5':
+                    fields_to_update.append('email')
+                elif choice == '6':
+                    done = True
+                else:
+                    print('Invalid choice!')
+
+            for field in fields_to_update:
+                value = input(f'Enter the new value for {field}: ')
+                contact[field] = value
+                print(f'{field} updated successfully!')
+
+            # Save the updated contacts to the file
+            with open('contacts.json', 'w') as file:
+                json.dump(contacts, file, indent=4)
+
+            print('Contact updated successfully!')
+            break
+    else:
+        print('Contact not found.')
 
 def delete_contact():
     # delete a contact
