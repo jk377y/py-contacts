@@ -1,9 +1,9 @@
 import json
 import uuid
+from tabulate import tabulate
 
 # need to define a data structure for the contacts, like a model in MVC
 # id, first name, last name, birthdate, phone number, email address
-
 
 # on startup, load the contacts from the file
 
@@ -12,10 +12,6 @@ with open('contacts.json', 'r') as file:
 
 with open('contacts.json', 'w') as file:
     json.dump(contacts, file) # this will save the contacts to the file
-
-
-
-
 
 # need to utilize CRUD operations on the contacts
 # create_contact is working as intended - will probably remove the seed files once everything is fully functional
@@ -48,15 +44,17 @@ def display_contact(contact):
     print(f'First Name: {contact["first_name"]}')
     print(f'Last Name: {contact["last_name"]}')
     print(f'Birthdate: {contact["birthdate"]}')
-    print(f'Phone Number: {",".join(contact["phone_number"])}')
+    print(f'Phone Number: {contact["phone_number"]}')  # Updated key to "phone_number"
     print(f'Email: {contact["email"]}')
     print('-------------------------------')
 
 def read_contact():
-    print('\n----- All Contacts -----')
-    print('ID\t\tFirst Name\tLast Name')
+    table = []
     for contact in contacts:
-        print(f'{contact["id"]}\t{contact["first_name"]}\t\t{contact["last_name"]}')
+        table.append([contact["id"], contact["first_name"], contact["last_name"]])
+
+    headers = ['ID', 'First Name', 'Last Name']
+    print(tabulate(table, headers, tablefmt='grid'))
     
     contact_id = input('\nEnter the ID of the contact you want to view: ')
     
@@ -83,8 +81,6 @@ def delete_contact():
     # save the contacts to the file
     pass
 
-
-
 # need to define a menu system for the user to interact with the contacts
 while True:
     print('\n-----Contacts Menu-----')
@@ -109,9 +105,3 @@ while True:
     else:
         print('Invalid choice!')
         continue # this will go back to the top of the loop and display the menu again if the user enters an invalid choice
-
-# on exit, save the contacts to the file - or maybe save on every change?
-
-
-
-# search and sort operations?
